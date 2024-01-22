@@ -3,7 +3,8 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { lusitana, rubik_marker_hatch } from '@/app/ui/fonts';
 import Image from 'next/image';
-import { Entity, Scene } from 'aframe-react';
+// import { Entity, Scene } from 'aframe-react';
+import 'mind-ar/dist/mindar-image-aframe.prod.js';
 
 export default function Page() {
   return (
@@ -44,6 +45,23 @@ export default function Page() {
             alt="Screenshots of the dashboard project showing desktop version"
           />
         </div>
+      </div>
+      <div class="example-container">
+        <a-scene mindar-image="imageTargetSrc: ./assets/band-example/band.mind; showStats: true; autoStart: false; maxTrack: 1" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+          <a-assets>
+            <a-asset-item id="bearModel" src="./assets/band-example/bear/scene.gltf"></a-asset-item>
+            <a-asset-item id="raccoonModel" src="./assets/band-example/raccoon/scene.gltf"></a-asset-item>
+          </a-assets>
+
+          <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+          <a-entity mindar-image-target="targetIndex: 0">
+            <a-gltf-model rotation="90 0 0 " position="0 0 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
+          </a-entity>
+          <a-entity mindar-image-target="targetIndex: 1">
+            <a-gltf-model rotation="90 0 0 " position="0 0 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
+          </a-entity>
+        </a-scene>
       </div>
     </main>
   );
